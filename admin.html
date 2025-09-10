@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+      table { width:100%; border-collapse: collapse; margin-top:20px; }
+      th, td { border:1px solid #ccc; padding:8px; text-align:left; }
+      th { background:#eee; }
+    </style>
+</head>
+<body>
+<h2>Admin Panel</h2>
+<a href="{{ url_for('logout') }}">Logout</a>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul>
+    {% for message in messages %}
+      <li class="err">{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Business Name</th>
+    <th>Status</th>
+    <th>Action</th>
+  </tr>
+  {% for app in applications %}
+  <tr>
+    <td>{{ app[0] }}</td>
+    <td>{{ app[1] }}</td>
+    <td>{{ app[28] }}</td>
+    <td>
+      <a href="{{ url_for('admin_details', app_id=app[0]) }}">View</a> |
+      <form style="display:inline" method="POST" action="{{ url_for('admin_action') }}">
+        <input type="hidden" name="id" value="{{ app[0] }}">
+        <button type="submit" name="action" value="approve">Approve</button>
+        <button type="submit" name="action" value="reject">Reject</button>
+      </form>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+</body>
+</html>

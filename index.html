@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Business Account Registration</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    .radio-group { display:flex; gap:20px; margin-top:5px; }
+    .checkbox-group { margin-top:15px; }
+    .err { color:red; }
+  </style>
+</head>
+<body>
+<div class="form-container">
+  <h2><i class="fa-solid fa-building"></i> Business Account Registration</h2>
+  <p class="subtitle">Quick, secure, and compliant — submit your business details</p>
+
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul>
+      {% for message in messages %}
+        <li class="err">{{ message }}</li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+
+  <form id="bizForm" method="POST" enctype="multipart/form-data" action="{{ url_for('submit') }}">
+    <!-- Business Info -->
+    <div class="form-section">
+      <h3><i class="fa-solid fa-briefcase"></i> Business Information</h3>
+      <label>Business Name*</label>
+      <input type="text" name="business_name" required>
+      <label>Business Type*</label>
+      <select name="business_type" required>
+        <option value="">Select</option>
+        <option>LLC</option>
+        <option>Corporation</option>
+        <option>Sole Proprietor</option>
+        <option>Nonprofit</option>
+      </select>
+      <label>Industry*</label>
+      <input type="text" name="industry" required>
+      <label>Year Established</label>
+      <input type="number" name="year_established" min="1900" max="{{ current_year }}" placeholder="e.g., {{ current_year }}">
+      <label>Employees</label>
+      <select name="employees">
+        <option value="">Select</option>
+        <option>1-10</option>
+        <option>11-50</option>
+        <option>51-200</option>
+        <option>200+</option>
+      </select>
+      <label>Business Description</label>
+      <textarea name="business_description" rows="4"></textarea>
+    </div>
+
+    <!-- Contact Info -->
+    <div class="form-section">
+      <h3><i class="fa-solid fa-address-card"></i> Contact Details</h3>
+      <label>Business Email*</label>
+      <input type="email" name="business_email" required>
+      <label>Business Phone*</label>
+      <input type="tel" name="business_phone" required>
+      <label>Business Website</label>
+      <input type="url" name="business_website">
+      <label>Address*</label>
+      <input type="text" name="address" required>
+      <label>City*</label>
+      <input type="text" name="city" required>
+      <label>State/Province*</label>
+      <input type="text" name="state" required>
+      <label>Postal Code*</label>
+      <input type="text" name="postal_code" required>
+      <label>Country*</label>
+      <input type="text" name="country" required>
+    </div>
+
+    <!-- Authorized Representative -->
+    <div class="form-section">
+      <h3><i class="fa-solid fa-user-check"></i> Authorized Representative</h3>
+      <label>Contact Name*</label>
+      <input type="text" name="contact_name" required>
+      <label>Contact Email*</label>
+      <input type="email" name="contact_email" required>
+      <label>Contact Phone*</label>
+      <input type="tel" name="contact_phone" required>
+      <label>Position/Title*</label>
+      <input type="text" name="position" required>
+      <label>ID Type*</label>
+      <select name="id_type" required>
+        <option value="">Select</option>
+        <option>Passport</option>
+        <option>Driver’s License</option>
+        <option>National ID</option>
+      </select>
+      <label>ID Number*</label>
+      <input type="text" name="id_number" required>
+    </div>
+
+    <!-- Files & Compliance -->
+    <div class="form-section">
+      <h3><i class="fa-solid fa-file-invoice"></i> Files & Compliance</h3>
+      <label>Business Registration Document*</label>
+      <input type="file" name="reg_doc" accept=".pdf,.jpg,.png,.jpeg" required>
+      <label>Tax Identification Document (optional)</label>
+      <input type="file" name="tax_doc" accept=".pdf,.jpg,.png,.jpeg">
+      <label>Authorized Rep ID Document*</label>
+      <input type="file" name="rep_id_doc" accept=".pdf,.jpg,.png,.jpeg" required>
+      <label>Proof of Address (optional)</label>
+      <input type="file" name="proof_address" accept=".pdf,.jpg,.png,.jpeg">
+      <label>TIN/EIN*</label>
+      <input type="text" name="tin" required>
+      <label>VAT/GST (if applicable)</label>
+      <input type="text" name="vat">
+      <label>Publicly traded?*</label>
+      <div class="radio-group">
+        <input type="radio" name="publicly_traded" value="yes" required> Yes
+        <input type="radio" name="publicly_traded" value="no"> No
+      </div>
+      <label>Operates internationally?*</label>
+      <div class="radio-group">
+        <input type="radio" name="international" value="yes" required> Yes
+        <input type="radio" name="international" value="no"> No
+      </div>
+    </div>
+
+    <!-- Terms -->
+    <div class="form-section checkbox-group">
+      <input type="checkbox" name="terms" value="yes" required> I agree to Terms & Conditions
+      <br>
+      <input type="checkbox" name="privacy" value="yes" required> I agree to Privacy Policy
+    </div>
+
+    <button type="submit" class="submit-btn">Submit Application</button>
+  </form>
+</div>
+</body>
+</html>

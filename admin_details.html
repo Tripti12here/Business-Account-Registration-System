@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Application Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<h2>Application Details</h2>
+<a href="{{ url_for('admin') }}">Back to Admin</a>
+
+<table border="1" cellpadding="8">
+  {% for key, value in application.items() %}
+    <tr>
+      <th>{{ key.replace('_',' ').title() }}</th>
+      <td>{{ value }}</td>
+    </tr>
+  {% endfor %}
+</table>
+</body>
+</html>
