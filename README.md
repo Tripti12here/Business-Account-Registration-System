@@ -30,12 +30,12 @@ This project allows businesses to submit registration details securely and provi
 ```bash
 git clone <repository-url>
 
-Navigate to the project folder:
+2.Navigate to the project folder:
 
 cd business-account-project
 
 
-Create a virtual environment and activate it:
+3.Create a virtual environment and activate it:
 
 python -m venv venv
 # Windows
@@ -44,17 +44,17 @@ venv\Scripts\activate
 source venv/bin/activate
 
 
-Install dependencies:
+4.Install dependencies:
 
 pip install flask
 
 
-Run the app:
+5.Run the app:
 
 python app.py
 
 
-Open your browser and go to http://127.0.0.1:5000/
+6.Open your browser and go to http://127.0.0.1:5000/
 
 Folder Structure
 project/
