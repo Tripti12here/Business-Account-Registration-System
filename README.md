@@ -26,8 +26,8 @@ This project allows businesses to submit registration details securely and provi
 
 ## Installation
 
-1. Clone the repository:
-```bash
+ 1.Clone the repository:
+    bash
 git clone <repository-url>
 
 2.Navigate to the project folder:
